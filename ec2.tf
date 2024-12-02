@@ -71,7 +71,7 @@ resource "aws_launch_template" "wordpress" {
   user_data     = base64encode(file("bootstrap.sh"))
   depends_on    = [aws_rds_cluster.wordpress-db-cluster]
   iam_instance_profile {
-    name = aws_iam_instance_profile.parameter_store_profile.name
+    name = aws_iam_instance_profile.wordpress-instance-profile.name
   }
   network_interfaces {
     security_groups = [aws_security_group.wordpress-sg.id]
