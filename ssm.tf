@@ -6,13 +6,13 @@ resource "random_string" "username" {
   length  = 12
   special = false
   upper   = false
-  numeric  = false
+  number = false
 }
 resource "random_password" "password" {
   length           = 12
   special          = false
   upper            = true
-  numeric           = true
+  number          = true
   override_special = "_-"
 }
 ###########################################################
@@ -45,7 +45,7 @@ resource "aws_ssm_parameter" "db-host" {
   name        = "/db-server/db-host"
   description = "Database Endpoint"
   type        = "String"
-  value       = aws_db_instance.myrds.endpoint
+  value       = aws_rds_cluster.wordpress-db-cluster.endpoint
 }
 
 resource "aws_ssm_parameter" "wp-title" {
@@ -90,7 +90,7 @@ resource "aws_ssm_parameter" "memcached-endpoint" {
   name        = "/memcached/endpoint"
   description = "memcached cluster endpoint"
   type        = "String"
-  value       = aws_elasticache_cluster.memchached-cluster.configuration_endpoint
+  value       = aws_elasticache_cluster.memcached-cluster.configuration_endpoint
 
 }
 resource "aws_ssm_parameter" "memcached-port" {

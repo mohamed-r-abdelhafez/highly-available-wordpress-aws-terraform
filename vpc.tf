@@ -117,7 +117,7 @@ resource "aws_eip" "eip" {
 resource "aws_nat_gateway" "wordpress-NAT-1" {
   allocation_id = aws_eip.eip[0].id
   subnet_id     = aws_subnet.pub-1.id
-  depends_on = [ aws_eip.eip ]
+  depends_on    = [aws_eip.eip]
   tags = {
     Name        = "wordpress-NATGW"
     Environment = var.env
@@ -127,7 +127,7 @@ resource "aws_nat_gateway" "wordpress-NAT-1" {
 resource "aws_nat_gateway" "wordpress-NAT-2" {
   allocation_id = aws_eip.eip[1].id
   subnet_id     = aws_subnet.pub-2.id
-  depends_on = [ aws_eip.eip ]
+  depends_on    = [aws_eip.eip]
 
   tags = {
     Name        = "wordpress-NATGW"

@@ -4,4 +4,4 @@ terraform.tfstate
 terraform.tfvars
 pub-key
 pub-key.pub
-
+.terraform.lock.hcl

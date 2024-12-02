@@ -65,11 +65,11 @@ resource "aws_autoscaling_group" "bastion_asg" {
 resource "aws_launch_template" "wordpress" {
   name          = "wordpress-app"
   description   = "Launch Template for the Wordpress instances"
-  image_id      = data.aws_ami.amzn_linux_2.id
+  image_id      = data.aws_ami.amzn_linux.id
   instance_type = var.instance-type-wordpress
   key_name      = var.ec2-public-key-name
   user_data     = base64encode(file("bootstrap.sh"))
-  depends_on = [ aws_rds_cluster.wordpress-db-cluster ]
+  depends_on    = [aws_rds_cluster.wordpress-db-cluster]
   iam_instance_profile {
     name = aws_iam_instance_profile.parameter_store_profile.name
   }
@@ -91,7 +91,7 @@ resource "aws_autoscaling_group" "wordpress_asg" {
   target_group_arns   = [aws_lb_target_group.alb-tg.arn]
   health_check_type   = "ELB"
   launch_template {
-    id      = aws_launch_template.wordpress.id
+    id = aws_launch_template.wordpress.id
   }
   tag {
     key                 = "Name"
