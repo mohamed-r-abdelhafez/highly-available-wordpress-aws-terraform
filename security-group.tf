@@ -41,7 +41,7 @@ resource "aws_vpc_security_group_ingress_rule" "http-inbound" {
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = 80
   to_port           = 80
-  ip_protocol       = "http"
+  ip_protocol       = "tcp"
 }
 resource "aws_vpc_security_group_egress_rule" "http-outbound" {
   security_group_id = aws_security_group.alb-sg.id

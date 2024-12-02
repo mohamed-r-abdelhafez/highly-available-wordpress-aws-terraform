@@ -50,6 +50,9 @@ wp_email=$(aws ssm get-parameter --name "/wordpress/email" --with-decryption --q
 sudo chown -R nginx:nginx /var/www/html
 sudo chmod -R 755 /var/www/html
 
+#Mount EFS file system
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport "$EFS_ID".efs.ap-south-1.amazonaws.com:/ /var/www/html
+
 # Download WordPress
 cd /var/www
 sudo wget https://wordpress.org/latest.tar.gz
@@ -58,9 +61,6 @@ sudo rm latest.tar.gz
 
 # Move WordPress files to html director
 sudo mv wordpress/* html
-
-#Mount EFS file system
-sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport "$EFS_ID".efs.ap-south-1.amazonaws.com:/ /var/www/html
 
 # Set up the WordPress wp-config.php file
 cd /var/www/html
