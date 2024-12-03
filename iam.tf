@@ -17,8 +17,8 @@ data "aws_iam_policy_document" "parameter-store-document" {
 }
 data "aws_iam_policy_document" "s3" {
   statement {
-    effect = "allow"
-    actions = ["s3:PutObject", "s3:GetObject", "s3:ListBucket" ]
+    effect    = "allow"
+    actions   = ["s3:PutObject", "s3:GetObject", "s3:ListBucket"]
     resources = [aws_s3_bucket.static-content.arn, "${aws_s3_bucket.static-content.arn}/*"]
   }
 }
@@ -38,10 +38,10 @@ resource "aws_iam_policy_attachment" "parameter-store-attach" {
   policy_arn = aws_iam_policy.parameter_store_policy.arn
 }
 resource "aws_iam_policy_attachment" "s3-attach" {
-  name = "s3-attach"
-  roles = [aws_iam_role.wordpress-iam-role.name]
+  name       = "s3-attach"
+  roles      = [aws_iam_role.wordpress-iam-role.name]
   policy_arn = aws_iam_policy.s3-policy-document.arn
-  
+
 }
 
 resource "aws_iam_instance_profile" "wordpress-instance-profile" {

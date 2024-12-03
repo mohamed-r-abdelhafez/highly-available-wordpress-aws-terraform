@@ -1,28 +1,34 @@
 resource "aws_s3_bucket" "static-content" {
-  bucket = "wordpress-static-content"
-  acl    = "private"
+  bucket        = "wordpress-static-content"
   force_destroy = true
-  versioning {
-    enabled = true
-  }
   tags = {
     Name        = "Wordpress Bucket"
     Environment = var.env
   }
 }
+resource "aws_s3_bucket_acl" "bucket_acl" {
+  bucket = aws_s3_bucket.static-content.id
+  acl    = "private"
+}
+resource "aws_s3_bucket_versioning" "versioning_bucket" {
+  bucket = aws_s3_bucket.static-content.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
 data "aws_iam_policy_document" "allow-cloud-front" {
   statement {
-    effect = "allow"
-    actions = ["s3:GetObject"]
+    effect    = "allow"
+    actions   = ["s3:GetObject"]
     resources = [aws_s3_bucket.static-content.arn, "${aws_s3_bucket.static-content.arn}/*"]
     principals {
-        type = "Service"
-        identifiers = ["cloudfront.amazonaws.com"]
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
     }
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values = aws_cloudfront_distribution.arn
+      values   = [aws_cloudfront_distribution.wordpress-cloudfront.arn]
     }
   }
 

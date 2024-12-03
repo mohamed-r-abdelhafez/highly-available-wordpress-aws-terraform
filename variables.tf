@@ -121,4 +121,25 @@ variable "wp-admin-email" {
   type        = string
   description = "Wordpress Admin email address"
 }
+####################################################################################
+##cloudfront##
+####################################################################################
 
+variable "price_class" {
+  type        = string
+  description = "price class for cloudfront distribution"
+
+}
+####################################################################################
+##Route53#
+####################################################################################
+variable "route53_zone_name" {
+  type        = string
+  description = "Name of route53 hosted zone"
+}
+
+variable "record_name" {
+  type        = string
+  description = "Name of route53 record"
+
+}
