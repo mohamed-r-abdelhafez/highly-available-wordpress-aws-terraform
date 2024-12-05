@@ -42,6 +42,7 @@ This project takes inspiration from AWS Whitepaper [Best Practices for WordPress
 * Route53 for DNS resolution with hosted zone and record alise refeer to CloudFront doman name.
 
 **Contributing**
+
 If you find anything here that needs fixing, or if you have improvements, please fork, fix and submit a pull request, or drop me a line if you have any questions. Thanks
 
 
