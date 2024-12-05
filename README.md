@@ -41,9 +41,10 @@ This project takes inspiration from AWS Whitepaper [Best Practices for WordPress
 * CloudFront for content delivery to reduce letancy, cost optimization and improve security,with 2 origins ALB for dynamic content and S3 for static content with Origin access control (OAC) to secures S3 origin access to CloudFront only.
 * Route53 for DNS resolution with hosted zone and record alise refeer to CloudFront doman name.
 
-**Contributing**
+# Contributing
 
 If you find anything here that needs fixing, or if you have improvements, please fork, fix and submit a pull request, or drop me a line if you have any questions. Thanks
 
+# Conclusion 
 
-
+This project offers a reliable, scalable, and secure solution for deploying WordPress on AWS, leveraging services like EC2, RDS, and ElastiCache for high availability, optimized performance, and seamless scalability. 
